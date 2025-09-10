@@ -48,14 +48,14 @@ class Booking(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name="Клиєнт", related_name='bookings')
     house = models.ForeignKey(House, on_delete=models.CASCADE, verbose_name="Будинок", related_name='bookings_all')
     arrival_date = models.DateField(verbose_name="Дата заїзду:")
-    departure_day = models.DateField(verbose_name="Дата виїзду:")
+    departure_date = models.DateField(verbose_name="Дата виїзду:")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="in_progress", verbose_name="Статус:")
-    comment = models.CharField(max_length=100, verbose_name="Коментар:")
+    comment = models.CharField(max_length=100, blank=True, null=True, verbose_name="Коментар:")
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.client.first_name} {self.client.last_name} з {self.arrival_date} по {self.departure_day}"
+        return f"{self.client.first_name} {self.client.last_name} з {self.arrival_date} по {self.departure_date}"
 
     class Meta:
         verbose_name = "Бронювання"
